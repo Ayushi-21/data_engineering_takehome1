@@ -63,21 +63,17 @@ services:
       - ./code:/app
       - ./dataset:/dataset
 
-jupyter:
-  container_name: jupyter
-  image: arjones/pyspark:2.4.5
-  restart: always
-  environment:
-    MASTER: spark://master:7077
-    PYSPARK_PYTHON: python3
-    SPARK_HOME: /opt/spark
-    PYTHONPATH: /opt/spark/python:/opt/spark/python/lib/py4j-*.zip:$PYTHONPATH
-  depends_on:
-    - master
-  ports:
-    - "8888:8888"
-  volumes:
-    - ./jupyter/notebook:/notebook
-    - ./dataset:/dataset
-    - ./code:/app
-
+  jupyter:
+    container_name: jupyter
+    image: arjones/pyspark:2.4.5
+    restart: always
+    environment:
+      MASTER: spark://master:7077
+    depends_on:
+      - master
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter/notebook:/notebook
+      - ./dataset:/dataset
+      - ./code:/app
